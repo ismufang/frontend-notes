@@ -10,6 +10,9 @@
     "start": "yarn docs:dev",
     "prettier": "prettier -c --write \"docs/**/*\""
   },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
   "lint-staged": {
     "**/*.{js,jsx,tsx,ts,less,md,json}": [
       "prettier --write"
