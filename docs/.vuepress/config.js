@@ -6,12 +6,12 @@ const path = require('path')
 module.exports = {
   base: '/',
   title: '前端笔记',
-  description: 'Learn a little bit every day',
+  description: 'Learn a little every day',
   port: 7777,
   dest: 'dist',
   markdown: {
     // 是否在每个代码块的左侧显示行号
-    lineNumbers: true,
+    lineNumbers: false,
   },
   configureWebpack: {
     resolve: {
@@ -49,7 +49,13 @@ module.exports = {
         children: [
           ['javaScript/scope', '作用域、闭包、this'],
           ['javaScript/prototype', '原型、原型链'],
+          ['javaScript/deepCopy', '实现一个深拷贝'],
         ],
+      },
+      {
+        title: '前端领域',
+        collapsable: false,
+        children: [['frontend/performanceOptimization', '前端性能优化']],
       },
       {
         title: '计算机网络',

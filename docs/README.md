@@ -1,8 +1,8 @@
 ---
 home: true
 heroText: 前端笔记
-tagline: Learn a little bit every day
-actionText: 快速上手 →
+tagline: Learn a little every day
+actionText: 开始阅读 →
 actionLink: /guide/
 features:
   - title: JavaScript进阶
