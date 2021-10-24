@@ -22,6 +22,8 @@
     "vuepress": "^1.8.2"
   },
   "devDependencies": {
-    "prettier": "^2.4.1"
+    "lint-staged": "^11.2.4",
+    "prettier": "^2.4.1",
+    "yorkie": "^2.0.0"
   }
 }
