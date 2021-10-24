@@ -6,9 +6,19 @@
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "build": "yarn docs:build"
+    "build": "yarn docs:build",
+    "start": "yarn docs:dev",
+    "prettier": "prettier -c --write \"docs/**/*\""
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,tsx,ts,less,md,json}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "vuepress": "^1.8.2"
+  },
+  "devDependencies": {
+    "prettier": "^2.4.1"
   }
 }

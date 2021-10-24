@@ -1,1 +1,1 @@
-# Divide And Rule 分而治之
+## Divide And Rule 分而治之

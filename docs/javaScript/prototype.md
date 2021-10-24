@@ -1,1 +1,1 @@
-# JavaSript原型，原型链
+## JavaSript 原型，原型链
