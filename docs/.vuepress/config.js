@@ -55,7 +55,10 @@ module.exports = {
       {
         title: '前端领域',
         collapsable: false,
-        children: [['frontend/performanceOptimization', '前端性能优化']],
+        children: [
+          ['frontend/performanceOptimization', '前端性能优化'],
+          ['frontend/webpack', 'webpack入门'],
+        ],
       },
       {
         title: '计算机网络',
