@@ -306,19 +306,20 @@ babel 的配置可以写在 use 内部 options 中，也可以自己在项目的
 
 ```js
 module.exports = {
-	// 用到的模块
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env']
-                    }
-                }
-        ]
-    }
+  // 用到的模块
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
+      },
+    ],
+  },
 }
 ```
 
@@ -334,14 +335,15 @@ yarn add less less-loader css-loader style-loader --dev
 
 ```js
 module.exports = {
-	// 用到的模块
-    module: {
-        rules: [
-            {
-                test: /\.less$/,
-                use: ['style-loader', 'css-laoder', 'less-loader']
-        ]
-    }
+  // 用到的模块
+  module: {
+    rules: [
+      {
+        test: /\.less$/,
+        use: ['style-loader', 'css-laoder', 'less-loader'],
+      },
+    ],
+  },
 }
 ```
 
@@ -357,14 +359,15 @@ yarn add url-loader --dev
 
 ```js
 module.exports = {
-	// 用到的模块
-    module: {
-        rules: [
-            {
-                test: /\.(png|gif|jpg|jpeg|svg)$/,
-                use: ['url-loader']
-        ]
-    }
+  // 用到的模块
+  module: {
+    rules: [
+      {
+        test: /\.(png|gif|jpg|jpeg|svg)$/,
+        use: ['url-loader'],
+      },
+    ],
+  },
 }
 ```
 
@@ -384,14 +387,15 @@ yarn add file-loader --dev
 
 ```js
 module.exports = {
-	// 用到的模块
-    module: {
-        rules: [
-            {
-                test: /\.(png|gif|jpg|jpeg|svg)$/,
-                use: ['file-loader']
-        ]
-    }
+  // 用到的模块
+  module: {
+    rules: [
+      {
+        test: /\.(png|gif|jpg|jpeg|svg)$/,
+        use: ['file-loader'],
+      },
+    ],
+  },
 }
 ```
 
@@ -399,22 +403,23 @@ module.exports = {
 
 ```js
 module.exports = {
-	// 用到的模块
-    module: {
-        rules: [
-            {
-                test: /\.(png|gif|jpg|jpeg|svg)$/,
-                use: {
-                    loader: 'url-laoder',
-                    options: {
-                        // 30kb一下文件采用url-laoder
-                        limit: 1024 * 30,
-                        // 否则采用file-loader
-                        fallback: 'file-loader',
-                    }
-                }
-        ]
-    }
+  // 用到的模块
+  module: {
+    rules: [
+      {
+        test: /\.(png|gif|jpg|jpeg|svg)$/,
+        use: {
+          loader: 'url-laoder',
+          options: {
+            // 30kb一下文件采用url-laoder
+            limit: 1024 * 30,
+            // 否则采用file-loader
+            fallback: 'file-loader',
+          },
+        },
+      },
+    ],
+  },
 }
 ```
 
@@ -474,6 +479,7 @@ module.exports = {
   plugins: [
     // 添加版权的插件
     new webpack.BannerPlugin('版权所有，翻版必究'),
+
     // 简化了 HTML 文件的创建，以便为你的 webpack 包提供服务。
     // 这对于那些文件名中包含哈希值，并且哈希值会随着每次编译而改变的 webpack 包特别有用
     new HtmlWebpackPlugin({
