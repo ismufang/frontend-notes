@@ -6,7 +6,7 @@ const path = require('path')
 module.exports = {
   base: '/',
   title: '前端笔记',
-  description: 'Learn a little every day',
+  description: 'front-end; JavaScript; TypeScript; Vue; React; Node;',
   port: 7777,
   dest: 'dist',
   markdown: {
