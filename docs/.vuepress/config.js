@@ -58,6 +58,7 @@ module.exports = {
         children: [
           ['frontend/performanceOptimization', '前端性能优化'],
           ['frontend/webpack', 'webpack入门'],
+          ['frontend/gulp', 'gulp入门'],
         ],
       },
       {
