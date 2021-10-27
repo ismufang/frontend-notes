@@ -68,6 +68,7 @@ module.exports = {
         children: [
           ['computerNetwork/', '计算机网络简介'],
           ['computerNetwork/httpCache', 'HTTP缓存机制'],
+          ['computerNetwork/security', '网络安全'],
         ],
       },
       {
