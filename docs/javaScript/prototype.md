@@ -1,1 +1,3 @@
 ## JavaSript 原型，原型链
+
+Updating...

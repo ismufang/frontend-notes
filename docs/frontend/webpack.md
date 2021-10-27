@@ -1,4 +1,4 @@
-## [Webpack](https://webpack.docschina.org/concepts/)
+## 1. [Webpack](https://webpack.docschina.org/concepts/)
 
 webpack 可以看做模块化打包机：它做的事情是，分析你的项目结构，找到 JavaScript 模块以及其他的一些浏览器不能直接运行的扩展语言（Scss，TypeScript 等），并将其转换和打包为合适的格式供浏览器使用
 
@@ -17,7 +17,7 @@ yarn add webpack --dev
 - Loader 负责实现资源模块加载
 - Plugin 解决其他自动化工作
 
-## 1. 导入导出
+## 2. 导入导出
 
 ```js
 module.exports = {
@@ -32,15 +32,15 @@ module.exports = {
 }
 ```
 
-## 2. 模块热更新
+## 3. 模块热更新
 
 - 开启 HMR
 - 热更新只更新修改的模块
 - 自动刷新会刷新整个页面
 
-## 3. 环境配置
+## 4. 环境配置
 
-### 3.1 不同环境下的配置
+### 4.1. 3.1 不同环境下的配置
 
 ```js
 "scripts": {
@@ -71,7 +71,7 @@ module.exports = (env, argv) => {
 }
 ```
 
-### 3.2 不同环境配置文件
+### 4.2. 3.2 不同环境配置文件
 
 通过`--config`进行配置不同环境文件
 
@@ -82,7 +82,7 @@ module.exports = (env, argv) => {
   },
 ```
 
-## 4. [webpack 优化](https://webpack.docschina.org/configuration/optimization/)
+## 5. [webpack 优化](https://webpack.docschina.org/configuration/optimization/)
 
 ```js
 module.exports = {
@@ -107,7 +107,7 @@ module.exports = {
 }
 ```
 
-### 4.1 webpack Tree Sharking
+### 5.1. 4.1 webpack Tree Sharking
 
 Tree-shaking 只对 ES Module 起作用，对于 commonjs 无效，对于 umd 亦无效
 
@@ -131,13 +131,13 @@ const config = {
 }
 ```
 
-#### 4.1.1 副作用
+#### 5.1.1. 4.1.1 副作用
 
 有些模块导入，只要被引入，就会对应用程序产生重要的影响。一个很好的例子就是全局样式表，或者设置全局配置的 JavaScript 文件。
 
 Webpack 认为这样的文件有“副作用”。具有副作用的文件不应该做 tree-shaking，因为这将破坏整个应用程序。Webpack 的设计者清楚地认识到不知道哪些文件有副作用的情况下打包代码的风险，因此默认地将所有代码视为有副作用。这可以保护你免于删除必要的文件，但这意味着 Webpack 的默认行为实际上是不进行 tree-shaking。
 
-#### 4.1.2 管理副作用
+#### 5.1.2. 4.1.2 管理副作用
 
 package.json 有一个特殊的属性`sideEffects`，就是为此而存在的
 
@@ -159,7 +159,7 @@ package.json 有一个特殊的属性`sideEffects`，就是为此而存在的
 }
 ```
 
-#### 4.1.3 全局 CSS 与副作用
+#### 5.1.3. 4.1.3 全局 CSS 与副作用
 
 为了保留全局 CSS 文件，我们只需要设置这个特殊的`sideEffects`标志为`true`
 
@@ -183,7 +183,7 @@ const config = {
 }
 ```
 
-#### 4.1.4 ES2015 模块 Babel 配置
+#### 5.1.4. 4.1.4 ES2015 模块 Babel 配置
 
 Webpack 不支持使用 commonjs 模块来完成 tree-shaking
 为了进行 tree-shaking，我们需要将代码编译到 es2015 模块
@@ -203,7 +203,7 @@ const config = {
 }
 ```
 
-## 5. 提取公共模块
+## 6. 提取公共模块
 
 ```js
 module.exports = {
@@ -215,7 +215,7 @@ module.exports = {
 }
 ```
 
-## 6. 魔法注释
+## 7. 魔法注释
 
 ```js
 import(/* webpackChunkName: 'album' */ './xxx').then(({ default: post }) => {
@@ -293,7 +293,7 @@ module.exports = {
 
 ## 11. 模块，常用 loaders
 
-### 11.1 ES6 -> ES5
+### 11.1. 11.1 ES6 -> ES5
 
 **安装 babel**
 
@@ -323,7 +323,7 @@ module.exports = {
 }
 ```
 
-### 11.2 less
+### 11.2. 11.2 less
 
 **安装**
 
@@ -347,7 +347,7 @@ module.exports = {
 }
 ```
 
-### 11.3 图片
+### 11.3. 11.3 图片
 
 **安装**
 
@@ -373,7 +373,7 @@ module.exports = {
 
 说明：url-loader 处理的图片一般比较小，会把图片转换成 base64 代码，直接添加页面。提供了一个方便的选择 limit，该选项用于控制当文件大小小于 limit 时才使用 url-loader
 
-#### 11.3.1 配置 file-loader
+#### 11.3.1. 11.3.1 配置 file-loader
 
 `file-loader`是将图片换成路径
 
@@ -453,7 +453,7 @@ module.exports = {
 
 常用插件如下：
 
-### 12.1 HtmlWebpackPlugin
+### 12.1. 12.1 HtmlWebpackPlugin
 
 该插件的作用：依据一个简单的 html 模板，生成一个自动引用打包后的 JS 文件的新的 index.html，这在每次生成的 JS 文件名称中带有 hash 值时非常有用（因为每次名称不同）
 
@@ -489,7 +489,7 @@ module.exports = {
 }
 ```
 
-### 12.2 Hot Module Replacement（HMR）
+### 12.2. 12.2 Hot Module Replacement（HMR）
 
 Hot Module Replacement（HMR）插件允许在修改组件代码后，自动刷新实时预览修改后的效果
 
@@ -506,7 +506,7 @@ module.exports = {
 }
 ```
 
-#### 12.2.1 配置 Babel
+#### 12.2.1. 12.2.1 配置 Babel
 
 ```json
 {
@@ -534,7 +534,7 @@ module.exports = {
 }
 ```
 
-### 12.3 其他插件
+### 12.3. 12.3 其他插件
 
 ```js
 module.exports = {
@@ -578,7 +578,7 @@ module.exports = {
 }
 ```
 
-### 12.4 处理缓存
+### 12.4. 12.4 处理缓存
 
 ```js
 module.exports = {

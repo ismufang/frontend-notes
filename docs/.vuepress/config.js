@@ -73,7 +73,7 @@ module.exports = {
       },
       {
         title: 'React',
-        collapsable: false,
+        collapsable: true,
         children: [
           ['react/hooks', 'React Hooks'],
           ['react/stateLibrary', 'React状态管理库'],
@@ -86,55 +86,57 @@ module.exports = {
       },
       {
         title: '数据结构与算法',
-        collapsable: true,
-        children: [
-          ['dataStructuresAndAlgorithms/', '介绍'],
-          {
-            title: '数据结构',
-            collapsable: true,
-            children: [
-              ['dataStructuresAndAlgorithms/stack', '栈'],
-              ['dataStructuresAndAlgorithms/queue', '队列'],
-              ['dataStructuresAndAlgorithms/linkedList', '链表'],
-              ['dataStructuresAndAlgorithms/tree', '树'],
-              ['dataStructuresAndAlgorithms/set', '集合'],
-              ['dataStructuresAndAlgorithms/map', '字典'],
-            ],
-          },
-          {
-            title: '算法',
-            collapsable: true,
-            children: [
-              ['dataStructuresAndAlgorithms/sort/bubbleSort', '冒泡排序'],
-              ['dataStructuresAndAlgorithms/sort/selectionSort', '选择排序'],
-              ['dataStructuresAndAlgorithms/sort/insertionSort', '插入排序'],
-              ['dataStructuresAndAlgorithms/sort/quickSort', '快速排序'],
-              ['dataStructuresAndAlgorithms/sort/mergeSort', '归并排序'],
-            ],
-          },
-          {
-            title: '算法设计思想',
-            collapsable: true,
-            children: [
-              [
-                'dataStructuresAndAlgorithms/designIdeas/divideAndRule',
-                '分而治之',
-              ],
-              [
-                'dataStructuresAndAlgorithms/designIdeas/dynamicProgramming',
-                '动态规划',
-              ],
-              [
-                'dataStructuresAndAlgorithms/designIdeas/greedyAlgorithm',
-                '贪心算法',
-              ],
-              [
-                'dataStructuresAndAlgorithms/designIdeas/backtrackingAlgorithm',
-                '回溯算法',
-              ],
-            ],
-          },
-        ],
+        path: 'dataStructuresAndAlgorithms/',
+        collapsable: false,
+        // children: [
+        //   ['dataStructuresAndAlgorithms/', '介绍'],
+        //   {
+        //     title: '数据结构',
+        //     collapsable: true,
+        //     children: [
+        //       ['dataStructuresAndAlgorithms/stack', '栈'],
+        //       ['dataStructuresAndAlgorithms/queue', '队列'],
+        //       ['dataStructuresAndAlgorithms/linkedList', '链表'],
+        //       ['dataStructuresAndAlgorithms/tree', '树'],
+        //       ['dataStructuresAndAlgorithms/set', '集合'],
+        //       ['dataStructuresAndAlgorithms/map', '字典'],
+        //     ],
+        //   },
+        //   {
+        //     title: '算法',
+        //     path: '/dataStructuresAndAlgorithms/sort/',
+        //     collapsable: true,
+        //     children: [
+        //       ['dataStructuresAndAlgorithms/sort/bubbleSort', '冒泡排序'],
+        //       ['dataStructuresAndAlgorithms/sort/selectionSort', '选择排序'],
+        //       ['dataStructuresAndAlgorithms/sort/insertionSort', '插入排序'],
+        //       ['dataStructuresAndAlgorithms/sort/quickSort', '快速排序'],
+        //       ['dataStructuresAndAlgorithms/sort/mergeSort', '归并排序'],
+        //     ],
+        //   },
+        //   {
+        //     title: '算法设计思想',
+        //     collapsable: true,
+        //     children: [
+        //       [
+        //         'dataStructuresAndAlgorithms/designIdeas/divideAndRule',
+        //         '分而治之',
+        //       ],
+        //       [
+        //         'dataStructuresAndAlgorithms/designIdeas/dynamicProgramming',
+        //         '动态规划',
+        //       ],
+        //       [
+        //         'dataStructuresAndAlgorithms/designIdeas/greedyAlgorithm',
+        //         '贪心算法',
+        //       ],
+        //       [
+        //         'dataStructuresAndAlgorithms/designIdeas/backtrackingAlgorithm',
+        //         '回溯算法',
+        //       ],
+        //     ],
+        //   },
+        // ],
       },
     ],
   },

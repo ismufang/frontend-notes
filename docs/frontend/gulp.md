@@ -1,14 +1,14 @@
-## [Gulp](https://www.gulpjs.com.cn/docs/)
+## 1. [Gulp](https://www.gulpjs.com.cn/docs/)
 
 gulp 是一个自动化构建工具，主要用来设定程序自动处理静态资源的工作。简单的说，gulp 就是用来打包项目的。
 
-## 1. 安装
+## 2. 安装
 
 ```bash
 npm install gulp --save-dev
 ```
 
-## 2. 创建 gulpfile.js 文件
+## 3. 创建 gulpfile.js 文件
 
 根目录下创建一个名为 gulpfile.js 的文件，作为 gulp 入口文件，在运行 gulp 命令时会自动加载。
 
@@ -21,7 +21,7 @@ function defaultTask(cb) {
 exports.default = defaultTask
 ```
 
-## 3. NPM 脚本
+## 4. NPM 脚本
 
 `develop` `build`为`gulpfile.js`导出的公开任务
 
@@ -35,9 +35,9 @@ exports.default = defaultTask
 }
 ```
 
-## 4. 任务管理
+## 5. 任务管理
 
-### 4.1 创建任务
+### 5.1. 4.1 创建任务
 
 > gulp 不再支持同步任务（Synchronous tasks）了。因为同步任务常常会导致难以调试的细微错误，例如忘记从任务（task）中返回 stream。
 
@@ -55,7 +55,7 @@ function callbackTask(cb) {
 exports.default = callbackTask
 ```
 
-### 4.2 导出任务
+### 5.2. 4.2 导出任务
 
 任务（tasks）可以是 public（公开） 或 private（私有） 类型的。
 
@@ -89,9 +89,9 @@ exports.build = build
 exports.develop = develop
 ```
 
-### 4.3 组合任务
+### 5.3. 4.3 组合任务
 
-#### 4.3.1 串行 series()
+#### 5.3.1. 4.3.1 串行 series()
 
 `series()`按顺序执行
 
@@ -111,7 +111,7 @@ function bundle(cb) {
 exports.build = series(transpile, bundle)
 ```
 
-#### 4.3.2 并行 parallel()
+#### 5.3.2. 4.3.2 并行 parallel()
 
 `parallel()`并行执行
 
@@ -131,24 +131,24 @@ function css(cb) {
 exports.build = parallel(javascript, css)
 ```
 
-#### 4.3.3 总结
+#### 5.3.3. 4.3.3 总结
 
 - `series()`和`parallel()`可以被嵌套到任意深度。
 - 当`series()`或`parallel()`被调用时，任务（tasks）被立即组合在一起。这就允许在组合中进行改变，而不需要在单个任务（task）中进行条件判断。
 - 当使用`series()`组合多个任务（task）时，任何一个任务（task）的错误将导致整个任务组合结束，并且不会进一步执行其他任务。当使用`parallel()`组合多个任务（task）时，一个任务的错误将结束整个任务组合的结束，但是其他并行的任务（task）可能会执行完，也可能没有执行完。
 
-## 5. 处理文件
+## 6. 处理文件
 
-### 5.1 读取文件 src(globs[, options])
+### 6.1. 5.1 读取文件 src(globs[, options])
 
 src 方法主要是用来读取目标源文件，所以参数就是一个目标源文件的路径
 它将所有匹配的文件读取到内存中并通过流（stream）进行处理。
 
-### 5.2 .pipe()
+### 6.2. 5.2 .pipe()
 
 流（stream）所提供的主要的 API 是 .pipe() 方法，用于连接转换流（Transform streams）或可写流（Writable streams）。
 
-### 5.3 输出文件 dest(path[, options])
+### 6.3. 5.3 输出文件 dest(path[, options])
 
 dest 方法主要用来将数据输出到文件中，所以参数就是目标文件路径。通常作为终止流
 
@@ -163,7 +163,7 @@ exports.default = function () {
 }
 ```
 
-## 6. 监听文件变化 watch
+## 7. 监听文件变化 watch
 
 函数原型
 
@@ -182,7 +182,7 @@ watch(['input/*.js', '!input/something.js'], function (cb) {
 })
 ```
 
-## 7. Gulp 插件
+## 8. Gulp 插件
 
 - gulp-concat : 合并文件(js/css)
 - gulp-uglify : 压缩 js 文件
@@ -244,7 +244,7 @@ function style() {
 }
 ```
 
-## 8. 简单的 gulpfile.js 配置
+## 9. 简单的 gulpfile.js 配置
 
 ```js
 const { src, dest, parallel, series, watch } = require('gulp')
