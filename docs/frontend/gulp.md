@@ -37,7 +37,7 @@ exports.default = defaultTask
 
 ## 5. 任务管理
 
-### 5.1. 4.1 创建任务
+### 5.1. 创建任务
 
 > gulp 不再支持同步任务（Synchronous tasks）了。因为同步任务常常会导致难以调试的细微错误，例如忘记从任务（task）中返回 stream。
 
@@ -55,7 +55,7 @@ function callbackTask(cb) {
 exports.default = callbackTask
 ```
 
-### 5.2. 4.2 导出任务
+### 5.2. 导出任务
 
 任务（tasks）可以是 public（公开） 或 private（私有） 类型的。
 
@@ -89,9 +89,9 @@ exports.build = build
 exports.develop = develop
 ```
 
-### 5.3. 4.3 组合任务
+### 5.3. 组合任务
 
-#### 5.3.1. 4.3.1 串行 series()
+#### 5.3.1. 串行 series()
 
 `series()`按顺序执行
 
@@ -111,7 +111,7 @@ function bundle(cb) {
 exports.build = series(transpile, bundle)
 ```
 
-#### 5.3.2. 4.3.2 并行 parallel()
+#### 5.3.2. 并行 parallel()
 
 `parallel()`并行执行
 
@@ -131,7 +131,7 @@ function css(cb) {
 exports.build = parallel(javascript, css)
 ```
 
-#### 5.3.3. 4.3.3 总结
+#### 5.3.3. 总结
 
 - `series()`和`parallel()`可以被嵌套到任意深度。
 - 当`series()`或`parallel()`被调用时，任务（tasks）被立即组合在一起。这就允许在组合中进行改变，而不需要在单个任务（task）中进行条件判断。
@@ -139,16 +139,16 @@ exports.build = parallel(javascript, css)
 
 ## 6. 处理文件
 
-### 6.1. 5.1 读取文件 src(globs[, options])
+### 6.1. 读取文件 src(globs[, options])
 
 src 方法主要是用来读取目标源文件，所以参数就是一个目标源文件的路径
 它将所有匹配的文件读取到内存中并通过流（stream）进行处理。
 
-### 6.2. 5.2 .pipe()
+### 6.2. .pipe()
 
 流（stream）所提供的主要的 API 是 .pipe() 方法，用于连接转换流（Transform streams）或可写流（Writable streams）。
 
-### 6.3. 5.3 输出文件 dest(path[, options])
+### 6.3. 输出文件 dest(path[, options])
 
 dest 方法主要用来将数据输出到文件中，所以参数就是目标文件路径。通常作为终止流
 
