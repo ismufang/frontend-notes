@@ -45,12 +45,14 @@ module.exports = {
       },
       {
         title: 'JavaScript进阶',
-        collapsable: false,
-        children: [
-          ['javaScript/scope', '作用域、闭包、this'],
-          ['javaScript/prototype', '原型、原型链'],
-          ['javaScript/deepCopy', '实现一个深拷贝'],
-        ],
+        path: 'javaScript/',
+        // collapsable: false,
+        // children: [
+        //   ['javaScript/', '作用域、闭包、this'],
+        //   // ['javaScript/scope', '作用域、闭包、this'],
+        //   ['javaScript/prototype', '原型、原型链'],
+        //   ['javaScript/deepCopy', '实现一个深拷贝'],
+        // ],
       },
       {
         title: '前端领域',
