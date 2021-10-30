@@ -258,9 +258,65 @@ function reverseList(head) {
 }
 ```
 
-#### 3.3.5. [2 两数相加（待做）](https://leetcode-cn.com/problems/add-two-numbers/)
+#### 3.3.5. [141 环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
 
-#### 3.3.6. 实现 instanceOf
+给定一个链表，判断链表中是否有环。如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。如果链表中存在环，则返回`true`。 否则，返回`false`。
+
+```js
+/**
+ * 方案一 集合（无序且唯一）
+ * 使用set集合存储head
+ * 如果出现已经存在的head
+ * 说明链表出现环路
+ * 时间复杂度：O(n)
+ * 空间复杂度：O(n)
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+function hasCycle(head) {
+  let p = head
+  const set = new Set()
+  while (p) {
+    if (set.has(p)) {
+      return true
+    }
+    set.add(p)
+    p = p.next
+  }
+  return false
+}
+
+/**
+ * 方案二 快慢指针
+ * 举例：比如龟兔赛跑，正常情况下乌龟无法跑赢兔子，但是如果出现环路
+ * 兔子首先进入环路，当乌龟进入环路时，兔子会再次与乌龟相遇
+ * 反向思考，如果乌龟能够与兔子相遇说明出现环路
+ * 时间复杂度：O(n)
+ * 空间复杂度：O(1)
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+function hasCycle(head) {
+  if (!head || !head.next) return false
+  let slow = head
+  let fast = head.next
+  // fast不为空，slow就不为空
+  // 快指针再次与慢指针相遇，则说明出现环路
+  while (fast && fast.next) {
+    if (slow === fast) {
+      return true
+    }
+    slow = slow.next
+    fast = fast.next?.next
+  }
+
+  return false
+}
+```
+
+#### 3.3.6. [2 两数相加（待做）](https://leetcode-cn.com/problems/add-two-numbers/)
+
+#### 3.3.7. 实现 instanceOf
 
 如果 A 沿着原型链找到 B.prototype，那么 A instanceOf B 为 true
 
@@ -276,7 +332,7 @@ function instanceOf(A, B) {
 }
 ```
 
-#### 3.3.7. 使用链表指针获取 JSON 的节点值
+#### 3.3.8. 使用链表指针获取 JSON 的节点值
 
 ```js
 const json = {
