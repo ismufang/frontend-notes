@@ -226,16 +226,35 @@ function deleteListNode(listNode) {
 #### 3.3.4. [206 反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
 
 ```js
-function reverseList(listNode) {
-  let p1 = null
-  let p2 = listNode
+// 迭代版
+// 双指针，一前一后遍历链表
+// 重复操作将n+1指针指向n
+// 时间复杂度：O(n)
+// 空间复杂度：O(1)
+function reverseList(head) {
+  let prev = null
+  let curr = head
   while (p2) {
-    const temp = p2.next
-    p2.next = p1
-    p1 = p2
-    p2 = temp
+    const next = p2.next
+    curr.next = prev
+    prev = curr
+    curr = next
   }
-  return p1
+  return prev
+}
+
+// 递归版
+// 时间复杂度：O(n)
+// 空间复杂度：O(n) 函数调用栈深度
+function reverseList(head) {
+  if (head === null || head.next === null) return head
+  const newHead = reverseList(head.next)
+  // 让n+1的next指向n (n+1 => head.next; n => head)
+  head.next.next = head
+  // 解除n的next
+  // n的next由n-1指定
+  head.next = null
+  return newHead
 }
 ```
 
@@ -272,7 +291,7 @@ path.forEach((k) => {
 })
 ```
 
-### 3.4. 集合
+### 3.4. 集合 Set
 
 **特点**
 无序且唯一
@@ -320,7 +339,7 @@ var intersection = function (nums1, nums2) {
 }
 ```
 
-### 3.5. 字典
+### 3.5. 字典 Map
 
 **特点**
 字典是一种存储唯一值的数据结构，它是以**键值对**的形式存储
@@ -416,7 +435,7 @@ var lengthOfLongestSubstring = function (s) {
 
 #### 3.5.5. [76 最小覆盖子串(待做)](https://leetcode-cn.com/problems/minimum-window-substring/)
 
-### 3.6. 树
+### 3.6. 树 Tree
 
 **特点**
 一种分层数据的抽象模型
