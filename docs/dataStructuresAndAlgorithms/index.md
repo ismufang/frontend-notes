@@ -518,6 +518,12 @@ DOM, 级联选择，
 **常规操作**
 深度/广度优先遍历、先中后序遍历
 
+**理解深度/广度优先遍历**
+
+- 比如看书
+- 深度遍历就想看书标题在看小节看完后在看下一个标题下一个小节
+- 广度遍历先看目录，在看章节，在看每个章节的小节
+
 **模拟一颗树**
 
 ```js
@@ -578,12 +584,6 @@ dfs(tree)
 - 把队头的 children 挨个入队
 - 重复第二，三步，直到队列为空
 
-**理解深度/广度优先遍历**
-
-- 比如看书
-- 深度遍历就想看书标题在看小节看完后在看下一个标题下一个小节
-- 广度遍历先看目录，在看章节，在看每个章节的小节
-
 ```js
 function bfs(root) {
   const q = [root]
@@ -634,7 +634,21 @@ function bfs(root) {
 }
 ```
 
-#### 3.6.4. 先序遍历
+##### 3.6.3.1. 二叉树遍历
+
+![binaryTree](@/dataStructuresAndAlgorithms/binaryTree.png)
+
+dfs 根据根节点访问顺序，可以分为：
+
+- 前序遍历（根左右） `[5,4,1,2,6,7,8]`
+- 中序遍历（左根右）`[1,4,2,5,7,6,8]`
+- 后序遍历（左右根）`[1,2,4,7,8,6,5]`
+
+bfs:
+
+- 层序遍历
+
+**先序遍历**
 
 - 访问根节点
 - 对根节点的左子树进行先序遍历
@@ -663,7 +677,7 @@ const preorder = (root) => {
 }
 ```
 
-#### 3.6.5. 中序遍历
+**中序遍历**
 
 - 对根节点的左子树进行中序遍历
 - 访问根节点
@@ -695,7 +709,7 @@ const inorder = (root) => {
 }
 ```
 
-#### 3.6.6. 后序遍历
+**后序遍历**
 
 - 对根节点的左子树进行后序遍历
 - 对根节点的右子树进行后序遍历
@@ -728,7 +742,7 @@ const postorder = (root) => {
 }
 ```
 
-#### 3.6.7. 遍历 JSON 的所有节点值
+#### 3.6.4. 遍历 JSON 的所有节点值
 
 ```js
 const json = {
@@ -744,7 +758,7 @@ const dfsJson = (n, path) => {
 dfsJson(json. [])
 ```
 
-#### 3.6.8. 渲染 Antd 中的树组件
+#### 3.6.5. 渲染 Antd 中的树组件
 
 ```js
 function () {
@@ -758,15 +772,222 @@ function () {
 }
 ```
 
-#### 3.6.9. [104 二叉树最大深度（待做）]()
+#### 3.6.6. [104 二叉树最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
 
-#### 3.6.10. [111 二叉树最大小深度（待做）]()
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * 方式一
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var maxDepth = function (root) {
+  let res = 0
+  const dfs = (n, l) => {
+    if (!n) return
+    if (!n.left && !n.right) {
+      return (res = Math.max(res, l))
+    }
+    dfs(n.left, l + 1)
+    dfs(n.right, l + 1)
+  }
+  dfs(root, 1)
+  return res
+}
 
-#### 3.6.11. [102 二叉树的层序遍历（待做）]()
+/**
+ * 方式二
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var maxDepth = function (root) {
+  if (!root) return 0
+  return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1
+}
+```
 
-#### 3.6.12. [94 二叉树的中序遍历（待做）]()
+#### 3.6.7. [111 二叉树最小深度（待做）](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/)
 
-#### 3.6.13. [112 路径总和（待做）]()
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * 广度优先遍历
+ * 时空复杂度：O(n)
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var minDepth = function (root) {
+  if (!root) return 0
+  const q = [[root, 1]]
+  while (q.length) {
+    const [n, level] = q.shift()
+    if (!n.left && !n.right) return level
+    n.left && q.push([n.left, level + 1])
+    n.right && q.push([n.right, level + 1])
+  }
+}
+```
+
+#### 3.6.8. [102 二叉树的层序遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)
+
+给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * 维持一个队列
+ * 存储节点和level值
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var levelOrder = function (root) {
+  if (!root) return []
+  const res = []
+  const q = [[root, 0]]
+  while (q.length) {
+    const [n, level] = q.shift()
+    if (!res[level]) {
+      res.push([n.val])
+    } else {
+      res[level].push(n.val)
+    }
+    if (n.left) q.push([n.left, level + 1])
+    if (n.right) q.push([n.right, level + 1])
+  }
+  return res
+}
+
+/**
+ * 优化
+ * 始终保持当前层级为队头
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var levelOrder = function (root) {
+  if (!root) return []
+  const res = []
+  const q = [root]
+  while (q.length) {
+    let len = q.length
+    res.push([])
+    // 把当前层级前的节点数据推出队列
+    while (len--) {
+      const n = q.shift()
+      res[res.length - 1].push(n.val)
+      if (n.left) q.push(n.left)
+      if (n.right) q.push(n.right)
+    }
+  }
+  return res
+}
+```
+
+#### 3.6.9. [144 二叉树的前序遍历](https://leetcode-cn.com/problems/binary-tree-preorder-traversal/)
+
+```js
+/**
+ * 递归版
+ * 时空复杂度：O(n)
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var preorderTraversal = function (root) {
+  let res = []
+  const rec = (root) => {
+    if (!root) return
+    res.push(root.val)
+    rec(root.left)
+    rec(root.right)
+  }
+  rec(root)
+  return res
+}
+
+/**
+ * 迭代版
+ * 维护一个栈
+ * 时空复杂度O(n)
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var preorderTraversal = function (root) {
+  const res = []
+  const stack = []
+  if (root) stack.push(root)
+  while (stack.length) {
+    const n = stack.pop()
+    res.push(n.val)
+    // 栈后进先出，先把right推入栈
+    if (n.right) stack.push(n.right)
+    if (n.left) stack.push(n.left)
+  }
+  return res
+}
+```
+
+#### 3.6.10. [94 二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
+
+```js
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var inorderTraversal = function (root) {
+  const res = []
+  const rec = (n) => {
+    if (!n) return
+    rec(n.left)
+    res.push(n.val)
+    rec(n.right)
+  }
+
+  rec(root)
+  return res
+}
+```
+
+#### 3.6.11. [145 二叉树的后序遍历](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/)
+
+```js
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var postorderTraversal = function (root) {
+  const res = []
+  const rec = (n) => {
+    if (!n) return
+    rec(n.left)
+    rec(n.right)
+    res.push(n.val)
+  }
+  rec(root)
+  return res
+}
+```
+
+#### 3.6.12. [112 路径总和（待做）]()
 
 ## 4. 排序与搜索
 

@@ -21,7 +21,7 @@ module.exports = {
     },
   },
   themeConfig: {
-    sidebarDepth: 6,
+    sidebarDepth: 3,
     lastUpdated: 'Last Updated',
     // repo: 'https://github.com/ismufang/frontend-notes',
     // repoLabel: '查看源码',
