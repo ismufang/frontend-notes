@@ -59,8 +59,9 @@ module.exports = {
         collapsable: false,
         children: [
           ['frontend/performanceOptimization', '前端性能优化'],
-          ['frontend/webpack', 'webpack入门'],
-          ['frontend/gulp', 'gulp入门'],
+          ['frontend/webpack', 'Webpack入门'],
+          ['frontend/gulp', 'Gulp入门'],
+          ['frontend/threejs', 'ThreeJS入门'],
         ],
       },
       {
