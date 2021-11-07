@@ -1232,6 +1232,7 @@ function binarySearch(arr, target) {
   - 3 无重复字符的最长子串（简单）
   - 344 反转字符串（简单）
   - 234 回文链表（简单）
+  - 15 三数之和（中等）
 - 快慢指针
   - 141 环形链路（简单）
 - 单调栈
@@ -1251,7 +1252,97 @@ function binarySearch(arr, target) {
 
 一般指针思维直接作用于原数据中，可以降低空间复杂度适用于原地算法要求
 
-### 5.1. 分而治之
+### 5.1. 双指针
+
+#### 5.1.1. [15 三数之和](https://leetcode-cn.com/problems/3sum/)
+
+给你一个包含 n 个整数的数组  nums，判断  nums  中是否存在三个元素 a，b，c ，使得  a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。
+
+注意：答案中不可以包含重复的三元组。
+
+
+
+```
+示例：
+
+输入：nums = [-1,0,1,2,-1,-4]
+输出：[[-1,-1,2],[-1,0,1]]
+```
+
+```js
+/**
+ * 暴力循环
+ * 三次循环
+ * 时间复杂度：O(n^3)
+ * 空间复杂度：O(n)
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var threeSum = function (nums) {
+  if (nums.length < 2) return []
+  nums = nums.sort((a, b) => a - b)
+  const res = new Map()
+  for (let x = 0; x < nums.length - 2; x++) {
+    for (let y = x + 1; y < nums.length - 1; y++) {
+      for (let z = y + 1; z < nums.length; z++) {
+        if (nums[x] + nums[y] + nums[z] === 0) {
+          const arr = [nums[x], nums[y], nums[z]]
+          if (!res.has(arr.toString())) {
+            res.set(arr.toString(), arr)
+          }
+        }
+      }
+    }
+  }
+  return res
+}
+```
+
+```js
+/**
+ * 双指针
+ * i, left, right 为指针；i为外循环指针，left, right为左右指针（不重复指针）
+ * 定义子问题：nums[i] + nums[left] + nums[right] = 0
+ * 将三数之和转化为两数之和
+ * 时间复杂度：O(n^2)
+ * 空间复杂度：O(n)
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var threeSum = function (nums) {
+  const res = []
+  if (nums.length < 2) return []
+  nums = nums.sort((a, b) => a - b)
+  // 使用map去重
+  const map = new Map()
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] > 0) {
+      continue
+    }
+    // 使用双指针缩小值得范围
+    let left = i + 1
+    let right = nums.length - 1
+    while (left < right) {
+      let s = nums[i] + nums[left] + nums[right]
+      if (s < 0) {
+        left++
+      } else if (s > 0) {
+        right--
+      } else {
+        const arr = [nums[i], nums[left], nums[right]]
+        if (!map.has(arr.toString())) {
+          map.set(arr.toString(), arr)
+        }
+        left++
+        right--
+      }
+    }
+  }
+  return [...map.values()]
+}
+```
+
+### 5.2. 分而治之
 
 分而治之是算法设计中的一种方法。它将一个问题**分**成多个和原问题相似的小问题，**递归解决**小问题，再将结果**合**并以解决原来的问题
 
@@ -1270,7 +1361,7 @@ function binarySearch(arr, target) {
 - 二分搜索
 - 翻转二叉树
 
-#### 5.1.1. [226 翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/)
+#### 5.2.1. [226 翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/)
 
 ```js
 /**
@@ -1287,7 +1378,7 @@ var invertTree = function (root) {
 }
 ```
 
-### 5.2. 动态规划
+### 5.3. 动态规划
 
 动态规划（Dynamic programming, DP）是算法设计中的一种方法。它将一个问题分解为**相互重叠**的子问题，通过反复求解子问题，来解决原来的问题
 
@@ -1310,7 +1401,7 @@ var invertTree = function (root) {
 - 动态规划 子问题相互重叠
 - 分而治之 子问题相互独立
 
-#### 5.2.1. [53 最大子序和](https://leetcode-cn.com/problems/maximum-subarray/)
+#### 5.3.1. [53 最大子序和](https://leetcode-cn.com/problems/maximum-subarray/)
 
 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
 
@@ -1342,7 +1433,7 @@ var maxSubArray = function (nums) {
 }
 ```
 
-#### 5.2.2. [121 买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/)
+#### 5.3.2. [121 买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/)
 
 给定一个数组 prices ，它的第  i 个元素  prices[i] 表示一支给定股票第 i 天的价格。
 
@@ -1402,7 +1493,7 @@ var maxProfit = function (prices) {
 }
 ```
 
-### 5.3. 贪心算法
+### 5.4. 贪心算法
 
 期盼通过每一阶段的局部最优选择，从而达到全局的最优，结果并不一定是最优。
 
@@ -1410,7 +1501,7 @@ var maxProfit = function (prices) {
 
 - 零钱兑换
 
-### 5.4. 回溯算法
+### 5.5. 回溯算法
 
 回溯算法是一种渐进式寻找问题解决方式的策略。回溯算法会先从一个可能的动作开始解决问题，如果不行，就回溯并选择另一个动作，直到将问题解决。
 
