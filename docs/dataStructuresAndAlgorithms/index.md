@@ -813,7 +813,7 @@ var maxDepth = function (root) {
 }
 ```
 
-#### 3.6.7. [111 二叉树最小深度（待做）](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/)
+#### 3.6.7. [111 二叉树最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/)
 
 ```js
 /**
@@ -987,7 +987,46 @@ var postorderTraversal = function (root) {
 }
 ```
 
-#### 3.6.12. [112 路径总和（待做）]()
+#### 3.6.12. [112 路径总和](https://leetcode-cn.com/problems/path-sum/)
+
+给你二叉树的根节点  root 和一个表示目标和的整数  targetSum ，判断该树中是否存在 根节点到叶子节点 的路径，这条路径上所有节点值相加等于目标和  targetSum 。
+
+**叶子节点**是指没有子节点的节点。
+
+```
+输入：root = [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum = 22
+输出：true
+```
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} targetSum
+ * @return {boolean}
+ */
+var hasPathSum = function (root, targetSum) {
+  if (!root) return false
+  let res = false
+  // 深度优先遍历
+  const dfs = (n, s) => {
+    if (!n.left && !n.right && s === targetSum) {
+      res = true
+    }
+    if (n.left) dfs(n.left, s + n.left.val)
+    if (n.right) dfs(n.right, s + n.right.val)
+  }
+  dfs(root, root.val)
+  return res
+}
+```
 
 ## 4. 排序与搜索
 
@@ -1259,8 +1298,6 @@ function binarySearch(arr, target) {
 给你一个包含 n 个整数的数组  nums，判断  nums  中是否存在三个元素 a，b，c ，使得  a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。
 
 注意：答案中不可以包含重复的三元组。
-
-
 
 ```
 示例：
