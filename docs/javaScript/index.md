@@ -275,3 +275,67 @@ function deepCopy(target) {
   return target
 }
 ```
+
+## 8. 实现事件发布订阅
+
+**思路**
+
+使用 `Map` 存储事件名及事件队列
+
+**功能**
+
+- `on` 监听事件
+- `once` 只监听一次的事件
+- `emit` 触发事件
+- `off` 清理事件
+- `clear` 清理所有事件
+
+[Npm package: event-whale](https://www.npmjs.com/package/event-whale)
+
+```js
+/**
+ * @name EventWhale
+ * @return {EventWhale}
+ */
+class EventWhale {
+  constructor() {
+    this.whale = new Map()
+  }
+  on(eventName, handler) {
+    const handlers = this.whale.get(eventName)
+    if (handlers) {
+      handlers.push(handler)
+    } else {
+      this.whale.set(eventName, [handler])
+    }
+  }
+  once(eventName, handler) {
+    handler.once = true
+    this.on(eventName, handler)
+  }
+  emit(eventName, evt) {
+    const handlers = this.whale.get(eventName)
+    if (handlers) {
+      handlers.forEach((handler) => {
+        handler(evt)
+      })
+      const newHandlers = handlers.filter((handler) => !handler.once)
+      this.whale.set(eventName, newHandlers)
+    }
+  }
+  off(eventName, handler) {
+    const handlers = this.whale.get(eventName)
+    if (handlers) {
+      if (handler) {
+        const index = handlers.indexOf(handler)
+        index !== -1 && handlers.splice(index, 1)
+      } else {
+        this.whale.delete(eventName)
+      }
+    }
+  }
+  clear() {
+    this.whale.clear()
+  }
+}
+```
