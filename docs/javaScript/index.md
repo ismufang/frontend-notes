@@ -339,3 +339,85 @@ class EventWhale {
   }
 }
 ```
+
+## 9. 实现 new 构造函数
+
+思路：
+
+1. 声明函数接收构造函数和参数
+2. 创建对象
+3. 继承原型
+4. 继承构造函数，绑定 this，传递参数
+5. 返回对象
+
+**创建可继承原型的对象**
+
+- 原生方法`Object.create(proto，[propertiesObject])`
+- 实现一个可继承原型的函数
+
+```js
+function createObject(prototype = null) {
+  const obj = new Object()
+  obj.__proto__ = prototype
+  return obj
+}
+```
+
+**实现 new 函数**
+
+```js
+function mynew(ctor, ...args) {
+  // 继承原型
+  // const obj = Object.create(ctor.prototype)
+  const obj = createObject(ctor.prototype)
+  // 继承构造函数
+  ctor.apply(obj, args)
+  return obj
+}
+```
+
+**使用函数**
+
+```js
+function Person(name, age) {
+  this.name = name
+  this.age = age
+}
+
+Person.prototype.sayName = function () {
+  console.log(this.name)
+}
+
+const p = mynew(Person, 'f', 18)
+p.sayName() // 'f'
+```
+
+**完整代码**
+
+```js
+function createObject(prototype = null) {
+  const obj = new Object()
+  obj.__proto__ = prototype
+  return obj
+}
+
+function mynew(ctor, ...args) {
+  // const obj = Object.create(ctor.prototype)
+  const obj = createObject(ctor.prototype)
+  ctor.apply(obj, args)
+  return obj
+}
+
+function Person(name, age) {
+  this.name = name
+  this.age = age
+}
+
+Person.prototype.sayName = function () {
+  console.log(this.name)
+}
+
+const p = mynew(Person, 'f', 18)
+p.sayName()
+console.log(p)
+```
