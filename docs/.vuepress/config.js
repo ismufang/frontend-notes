@@ -46,13 +46,6 @@ module.exports = {
       {
         title: 'JavaScript进阶',
         path: 'javaScript/',
-        // collapsable: false,
-        // children: [
-        //   ['javaScript/', '作用域、闭包、this'],
-        //   // ['javaScript/scope', '作用域、闭包、this'],
-        //   ['javaScript/prototype', '原型、原型链'],
-        //   ['javaScript/deepCopy', '实现一个深拷贝'],
-        // ],
       },
       {
         title: '前端领域',
@@ -77,15 +70,17 @@ module.exports = {
       {
         title: 'React',
         collapsable: true,
-        children: [
-          ['react/hooks', 'React Hooks'],
-          ['react/stateLibrary', 'React状态管理库'],
-        ],
+        path: 'react/',
       },
       {
         title: 'Vue',
         collapsable: true,
-        children: [['vue/', '介绍']],
+        path: 'vue/',
+      },
+      {
+        title: 'Node',
+        collapsable: true,
+        path: 'node/',
       },
       {
         title: '数据结构与算法',
